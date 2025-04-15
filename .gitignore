@@ -1,0 +1,100 @@
+output
+extracted_files
+*.xml
+*.iml
+# ============================================
+# OS-specific
+# ============================================
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# mypy
+.mypy_cache/
+
+# Pyright / Pylance
+.pyright/
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+
+# ============================================
+# VSCode
+# ============================================
+.vscode/
+
+# ============================================
+# PyCharm
+# ============================================
+.idea/
+*.iml
+
+# ============================================
+# macOS
+# ============================================
+*.swp
+*.swo
+
+# ============================================
+# Misc
+# ============================================
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+
+# Editable installs
+src/
+
+# Data files
+*.csv
+*.tsv
+*.xls
+*.xlsx
+*.h5
+*.nc
+*.grib
+*.zip
+*.tar
+*.gz
