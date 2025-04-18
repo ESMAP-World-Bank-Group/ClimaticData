@@ -3,6 +3,8 @@ extracted_files
 *.xml
 *.iml
 .idea
+
+*.nc
 # ============================================
 # OS-specific
 # ============================================
@@ -99,3 +101,7 @@ src/
 *.zip
 *.tar
 *.gz
+/era5_prepared_files/
+/era5_extracted_files/
+/comparison/
+/catchment_files/
