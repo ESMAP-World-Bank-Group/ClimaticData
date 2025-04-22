@@ -199,8 +199,12 @@ def plot_spatial_mean_timeseries_all_vars(ds, lat_name='latitude', lon_name='lon
         # Calculate spatial average over lat/lon
         spatial_mean = ds[var].mean(dim=[lat_name, lon_name])
 
+        # Get units if available
+        units = ds[var].attrs.get('units', '')
+        label = f"{var.upper()} ({units})" if units else var.upper()
+
         # Plot it
-        plt.plot(ds.time, spatial_mean, label=var.upper())
+        plt.plot(ds.time, spatial_mean, label=label)
 
     plt.title("Spatial Mean Time Series for All Variables")
     plt.xlabel("Time")
@@ -359,7 +363,7 @@ def calculate_spatial_mean_annual(data_climatic, gdf_regions, lat_name='Y', lon_
 
     return df
 
-def convert_monthly_mm_day_to_yearly_mm_year(df, var_name="Runoff"):
+def convert_to_yearly_mm_year(df, var_name="Runoff", unit_init="mm/day"):
     """
     Convert monthly values in mm/day to yearly total in mm/year.
 
@@ -367,12 +371,17 @@ def convert_monthly_mm_day_to_yearly_mm_year(df, var_name="Runoff"):
     :param var_name: Name of the variable column (e.g., 'Runoff').
     :return: DataFrame with yearly runoff totals in mm/year per region.
     """
+
     df["time"] = pd.to_datetime(df["time"])
     df["year"] = df["time"].dt.year
-    df["days_in_month"] = df["time"].dt.days_in_month
-
-    # mm/month = mm/day * days in month
-    df["monthly_total_mm"] = df[var_name] * df["days_in_month"]
+    if unit_init == "mm/day":
+        df["days_in_month"] = df["time"].dt.days_in_month
+        # mm/month = mm/day * days in month
+        df["monthly_total_mm"] = df[var_name] * df["days_in_month"]
+    elif unit_init == "mm/month":
+        df["monthly_total_mm"] = df[var_name]
+    else:
+        raise ValueError("unit_init must be either 'mm/day' or 'mm/month'")
 
     # Sum over year per region
     df_yearly = (
